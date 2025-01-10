@@ -1,0 +1,8 @@
+<!-- multi_pi_jetson.launch -->
+<launch>
+
+     <!-- Start dynamic map and path planning nodes on the Jetson (local) -->
+    <node name="dynamic_map_builder" pkg="dynamic_map_pkg" type="dynamic_map_builder.py" output="screen" />
+    <node name="path_planning" pkg="path_planning" type="path_planning_node.py" output="screen" />
+    <node name="receiver_pkg" pkg="receiver_pkg" type="receive_node.py" output="screen" />
+</launch>

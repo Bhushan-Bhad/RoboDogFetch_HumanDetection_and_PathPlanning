@@ -1,0 +1,26 @@
+<launch>
+    <node pkg="path_planning" type="path_planning_node.py" name="path_planning_node" output="screen"/>
+
+  <!-- Robot State Publisher for URDF -->
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"/>
+
+  <!-- Map Server (Optional, if using a static map) -->
+  <!-- <node name="map_server" pkg="map_server" type="map_server" args="$(find path_planning_pkg)/maps/my_map.yaml" /> -->
+
+  <!-- AMCL for localization (if needed) -->
+  <node name="amcl" pkg="amcl" type="amcl" />
+
+  <!-- Navigation Stack -->
+  <node name="move_base" pkg="move_base" type="move_base" output="screen">
+    <param name="base_global_planner" value="navfn/NavfnROS"/>
+    <param name="base_local_planner" value="base_local_planner/TrajectoryPlannerROS"/>
+    
+    <!-- Costmap configuration -->
+    <rosparam file="$(find path_planning_pkg)/config/costmap_common_params.yaml" command="load" ns="global_costmap" />
+    <rosparam file="$(find path_planning_pkg)/config/costmap_common_params.yaml" command="load" ns="local_costmap" />
+    <rosparam file="$(find path_planning_pkg)/config/global_costmap_params.yaml" command="load" />
+    <rosparam file="$(find path_planning_pkg)/config/local_costmap_params.yaml" command="load" />
+    <rosparam file="$(find path_planning_pkg)/config/base_local_planner_params.yaml" command="load" />
+  </node>
+
+</launch>

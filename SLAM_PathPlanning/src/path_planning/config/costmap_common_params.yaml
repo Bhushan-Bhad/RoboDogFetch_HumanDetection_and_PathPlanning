@@ -1,0 +1,8 @@
+obstacle_range: 2.5
+raytrace_range: 3.0
+footprint: [[0.2, 0.2], [0.2, -0.2], [-0.2, -0.2], [-0.2, 0.2]]
+inflation_radius: 0.5
+cost_scaling_factor: 10.0
+
+observation_sources: point_cloud_sensor
+point_cloud_sensor: {sensor_frame: camera_link, data_type: PointCloud2, topic: /dynamic_map, marking: true, clearing: true}
